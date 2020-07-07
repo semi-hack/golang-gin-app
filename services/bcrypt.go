@@ -5,7 +5,7 @@ import (
 )
 
 
-// compare password ...
+// PasswordCompare ...
 func PasswordCompare(password []byte, hashedPassword []byte) error {
 	err := bcrypt.CompareHashAndPassword(hashedPassword, password)
 

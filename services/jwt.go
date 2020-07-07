@@ -7,18 +7,16 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-// type JWTservice interface {
-// 	GenerateToken()
-// 	ValidateToken()
-// }
 
 var key = []byte(os.Getenv("SECRET_KEY"))
 
+// Claims ...
 type Claims struct {
 	Username string `json:"name"`
 	jwt.StandardClaims
 }
 
+// GenerateToken ...
 func GenerateToken(Username string) (string, error) {
 	expirationTime := time.Now().Add(1440 *time.Minute)
 
