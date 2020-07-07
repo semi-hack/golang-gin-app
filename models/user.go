@@ -5,10 +5,12 @@ const (
 	Usercollection = "users"
 )
 
-// User struct
+// User struct ...
 type User struct {
-	Name string `json:"name,omitempty" binding:"required"`
-	Password string `json:"password"`
-	Age int `json:"age"`
-	Username string `json:"username"`
+	Name string `json:"name" omitempty" binding:"required"`
+	Email string `json:"email"`
+	Password string `json:"password" bson:"password"`
+	Age int `json:"age" bson: "age"`
+	Username string `json:"username" bson: "username"`
 }
+

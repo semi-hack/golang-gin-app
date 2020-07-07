@@ -20,6 +20,7 @@ func init() {
 	// Set client options
 	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017/rest")
 
+
 	// Connect to MongoDB
 	if clt, err := mongo.Connect(context.TODO(), clientOptions); err != nil {
 		log.Fatalln(err)
@@ -33,6 +34,14 @@ func init() {
 	//collection := client.Collection("users")
 
 	fmt.Println("Connected to MongoDB!")
+}
+
+type Collection struct {
+	// collection is a connection to a MongoDB collection
+	collection *mongo.Collection
+
+	// database is a connection to the MongoDB database that houses the collection
+	database *mongo.Database
 }
 
 // GetConnection returns a connection to the DB

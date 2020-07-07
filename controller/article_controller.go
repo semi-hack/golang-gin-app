@@ -2,8 +2,8 @@ package controller
 
 import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"auth/db"
-	"auth/models"
+	"gin/db"
+	"gin/models"
 	"context"
 
 	"go.mongodb.org/mongo-driver/bson"

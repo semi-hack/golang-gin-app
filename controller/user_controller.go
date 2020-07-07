@@ -1,8 +1,9 @@
 package controller
 
 import (
-	"auth/db"
-	"auth/models"
+	"gin/db"
+	"gin/services"
+	"gin/models"
 	"context"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -28,9 +29,12 @@ func Createuser(c *gin.Context) {
 		return
 	}
 
-	db.GetConnection().Collection(models.Usercollection).InsertOne(context.TODO(), data)
+	id, err := services.CreateUser(&data)
+	if err != nil {
+		c.JSON(500, gin.H{"msg": err })
+	}
+	c.JSON(200, gin.H{"id": id })
 
-	c.JSON(200, gin.H{"message": "user created"})
 }
 
 // Getuserbyid .....

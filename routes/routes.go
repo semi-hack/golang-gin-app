@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"auth/controller"
+	"gin/controller"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,6 +17,12 @@ func Initialize() {
 	r.GET("/getArticles", controller.Getarticle)
 	r.DELETE("/delete", controller.Deleteuser)
 	r.PUT("/update", controller.Updateuser)
+	r.POST("/todo", controller.HandleCreateTodo)
+	r.GET("/GetTodo", controller.HandleGetAllTodo)
+	r.GET("/GetTodo/:id", controller.HandleGetTodoById)
+	//r.PAtCH("/updateTodo", controller.HandleUpdateTodo)
+	r.POST("/login", controller.Login)
+
 
 	r.Run()
 }
