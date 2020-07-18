@@ -1,27 +1,28 @@
 package services
 
-// import (
-// 	"golang.org/x/crypto/bcrypt"
-// )
+import (
+	"context"
+	"fmt"
+	"log"
+	"go.mongodb.org/mongo-driver/bson"
+	//"go.mongodb.org/mongo-driver/bson/primitive"
 
-// type LoginService interface {
-// 	Login(username string, password string) bool
-// }
+	"gin/db"
+	"gin/models"
+)
 
-// type loginService struct {
-// 	authorizedUsername string
-// 	authorizedPassword string
-// }
 
-// func NewLoginService() LoginService {
-// 	return &LoginService {
-// 		authorizedUsername:"",
-// 		authorizedPassword:"",
-// 	}
-// }
+// GetUser ...
+func GetUser(foo string) (*models.User, error) {
+	var user *models.User
+	//objID, err := primitive.ObjectIDFromHex(ID)
+	query := bson.M{"username": foo}
+	err := db.GetConnection().Collection(models.Usercollection).FindOne(context.TODO(), query).Decode(&user)
+	if err != nil {
+		log.Println("failure", err)
+		return nil, err
+	} 
+	fmt.Println(user)
+	return user, nil
 
-// func (s *loginService) Login(username string, password string) bool {
-// 	return s.authorizedUsername == username &&
-// 	  s.authorizedPassword == password
-
-// }
+}

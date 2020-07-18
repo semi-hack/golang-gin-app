@@ -19,7 +19,7 @@ func Initialize() {
 	r.PUT("/update", controller.Updateuser)
 	r.POST("/todo", controller.HandleCreateTodo)
 	r.GET("/GetTodo", controller.HandleGetAllTodo)
-	r.GET("/GetTodo/:id", controller.HandleGetTodoById)
+	r.GET("/GetTodo/id", controller.HandleGetTodoByID)
 	//r.PAtCH("/updateTodo", controller.HandleUpdateTodo)
 	r.POST("/login", controller.Login)
 

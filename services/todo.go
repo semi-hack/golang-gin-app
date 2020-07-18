@@ -40,14 +40,18 @@ func GetAll() ([]*models.Todo, error) {
 }
 
 // GetTodoById ...
-func GetTodoById(id primitive.ObjectID) (*models.Todo, error) {
+func GetTodoByID(id string) (*models.Todo, error) {
 	var todo *models.Todo
+
+	objID, err := primitive.ObjectIDFromHex(id)
 	
-	result := db.GetConnection().Collection(models.Todocollection).FindOne(context.TODO(), bson.D{})
+	query := bson.M{"_id": objID}
+	
+	result := db.GetConnection().Collection(models.Todocollection).FindOne(context.TODO(), query)
 	if result == nil {
 		return nil, errors.New("could not find todo")
 	}
-	err := result.Decode(&todo)
+	err = result.Decode(&todo)
 
 	if err != nil {
 		log.Printf("failure", err)

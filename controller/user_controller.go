@@ -40,7 +40,6 @@ func Createuser(c *gin.Context) {
 // Getuserbyid .....
 func Getuserbyid(c *gin.Context) {
 
-	var users models.User
 	id := struct {
 		ID string `form:"_id" binding:"required"`
 	}{}
@@ -48,16 +47,8 @@ func Getuserbyid(c *gin.Context) {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
-	objID, err := primitive.ObjectIDFromHex(id.ID)
-	if err != nil {
-		c.JSON(400, gin.H{"error": "Invalid ID"})
-		return
-	}
-	query := bson.M{"_id": objID}
 
-	connection := db.GetConnection().Collection(models.Usercollection)
-	err = connection.FindOne(context.TODO(), query).Decode(&users)
-
+    users, err := services.GetUserByID(id.ID)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return

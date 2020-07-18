@@ -35,18 +35,19 @@ func HandleGetAllTodo(c *gin.Context) {
 	c.JSON(200, gin.H{"Todos": T})
 }
 
-// HandleGetTodoById ...
-func HandleGetTodoById(c *gin.Context) {
-	var todo models.Todo
+// HandleGetTodoByID ...
+func HandleGetTodoByID(c *gin.Context) {
+	//var todo models.Todo
 	
-	//id := c.Param("id")
-	//idparse, err := primitive.ObjectIDFromHex(id)
+	id := struct {
+		ID string `form:"_id"`
+	}{}
 	
-	if err:= c.ShouldBindUri(&todo); err != nil {
+	if err:= c.ShouldBindQuery(&id); err != nil {
 		c.JSON(400, gin.H{"msg": err })
 		return
 	}
-	var T, err = services.GetTodoById(todo.ID)
+	var T, err = services.GetTodoByID(id.ID)
 	if err != nil {
 		c.JSON(500, gin.H{"msg": err})
 	}
