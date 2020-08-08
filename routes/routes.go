@@ -10,13 +10,17 @@ import (
 func Initialize() {
 	r := gin.Default()
 
+	user := r.Group("/user")
+	{
+		user.POST("/create", controller.Createuser)
+		user.GET("/users", controller.Getuserbyid)
+		user.PATCH("/update", controller.Updateuser)
+		user.DELETE("/delete", controller.Deleteuser)
+	}
+	
 	r.GET("/test", controller.Home)
-	r.POST("/create", controller.Createuser)
 	r.POST("/article", controller.Createarticle)
-	r.GET("/users", controller.Getuserbyid)
 	r.GET("/getArticles", controller.Getarticle)
-	r.DELETE("/delete", controller.Deleteuser)
-	r.PUT("/update", controller.Updateuser)
 	r.POST("/todo", controller.HandleCreateTodo)
 	r.GET("/GetTodo", controller.HandleGetAllTodo)
 	r.GET("/GetTodo/id", controller.HandleGetTodoByID)
