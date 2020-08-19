@@ -12,19 +12,19 @@ import (
 )
 
 // CreateUser ...
-func CreateUser(user *models.User) (primitive.ObjectID, error){
+func CreateUser(user *models.User) (*models.User, error){
 	hash, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
 	if err != nil {
-		return primitive.NilObjectID, err
+		//return primitive.NilObjectID, err
 	}
 	user.Password = string(hash)
 	result, err := db.GetConnection().Collection(models.Usercollection).InsertOne(context.TODO(), user)
     if err != nil {
 		log.Printf("could not create todo: %v", err)
-		return primitive.NilObjectID, err
+		// return primitive.NilObjectID, err
 	}
-	oid := result.InsertedID.(primitive.ObjectID)
-	return oid, nil
+	//oid := result.InsertedID.(primitive.ObjectID)
+	return result, nil
 }
 
 // GetUserByID ...

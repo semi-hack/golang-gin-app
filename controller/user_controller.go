@@ -33,7 +33,7 @@ func Createuser(c *gin.Context) {
 	if err != nil {
 		c.JSON(500, gin.H{"msg": err })
 	}
-	c.JSON(200, gin.H{"id": id })
+	c.JSON(200, gin.H{"id": id, "user": id.MarshalJSON })
 
 }
 

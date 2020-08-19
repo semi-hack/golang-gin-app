@@ -18,7 +18,8 @@ var (
 
 func init() {
 	// Set client options
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017/rest")
+	// clientOptions := options.Client().ApplyURI("mongodb://localhost:27017/rest")
+	clientOptions := options.Client().ApplyURI("mongodb+srv://semi:sengoku00@cluster0.ilogk.mongodb.net/<dbname>?retryWrites=true&w=majority")
 
 
 	// Connect to MongoDB
@@ -48,3 +49,14 @@ type Collection struct {
 func GetConnection() *mongo.Database {
 	return client
 }
+
+
+
+// import "go.mongodb.org/mongo-driver/mongo"
+
+// ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+// defer cancel()
+// client, err := mongo.Connect(ctx, options.Client().ApplyURI(
+//    "mongodb+srv://semi:<password>@cluster0.ilogk.mongodb.net/<dbname>?retryWrites=true&w=majority",
+// ))
+// if err != nil { log.Fatal(err) }
